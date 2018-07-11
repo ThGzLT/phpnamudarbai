@@ -27,28 +27,29 @@ echo skaiciuot ($a, $b);
 
 <?php
 // php7 task2
-$number = array();
-function divisor()
+function ar($number)
 {
-    foreach (range(0, 1000) as $number) {
-        $divisors = [];
-        for ($i = 1; $i < $number; $i++) {
-            if (($number % $i) == 0) {
-                $divisors [] = $i;
-            }
-            return $divisors;
+    $divisors = [];
+    for ($i = 1; $i < $number; $i++) {
+        if ($number % $i == 0) {
+            $divisors [] = $i;
         }
     }
+    return $divisors;
 }
 
-function daliklis($number, $divisors)
+function daliklis1($number1, $number)
 {
-    if ($number == array_sum($divisors) && $number > 0) {
-        echo " $number yra Tobulasis skaicius <br>";
-    } else {
-        echo "";
+    if ($number1 == $number) {
+        return true;
+    }
+    return false;
+}
+
+foreach (range(1, 1000) as $key) {
+    $sum = array_sum(ar($key));
+    if (daliklis1($sum, $key)) {
+        echo $key . ' ';
     }
 }
-
-divisor(daliklis($number, $divisors));
 ?>
