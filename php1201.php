@@ -21,28 +21,36 @@ class Radar
     public $distance;
     public $time;
 
-    function __construct($date, $number, $distance, $time)
+    function __construct($date, $number, $distance, $time, $median)
     {
         $this->date = $date;
         $this->number = $number;
         $this->distance = $distance;
         $this->time = $time;
+        $this->median = round($this->distance / $this->time, 1);
     }
 
-    function greitis()
+    function vp()
     {
-        $greiciai = $this->distance / $this->time;
+        return $this->date . "<br>" . $this->number . "<br>" . $this->distance . "<br>" . $this->time . "<br>" . $this->median;
     }
 }
 
-$masinos = [
-    new radar ('2010-01-10', '1', 1000, 60),
-    new radar ('2015-10-01', '2', 1500, 30),
-    new radar ('2004-01-10', '3', 800, 20),
-    new radar ('2001-01-10', '4', 600, 10)
+$cars = [
+    new radar ('2010-01-10', '1', 1000, 60, $median),
+    new radar ('2015-10-01', '2', 1500, 30, $median),
+    new radar ('2004-01-10', '3', 800, 20, $median),
+    new radar ('2001-01-10', '4', 600, 10, $median)
 ];
-foreach ($masinos as $key) {
-    $key11 = $key->distance / $key->time;
-    echo round($key11, 1);
-    var_dump($key11);
+function cmp($a, $b)
+{
+    return strcmp($a->median, $b->median);
 }
+
+usort($cars, "cmp");
+foreach ($cars as $key) {
+    echo $key->vp();
+    var_dump($key);
+}
+var_dump($cars);
+?>
