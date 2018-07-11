@@ -4,11 +4,17 @@
 lauką nuo vėliausio iki anksčiausio, t.y. mažėjimo tvarka.
  */
 
-$date = [
-    new DateTime("1600-01-05"),
-    new DateTime("1100-01-05"),
-    new DateTime("1400-01-05"),
-    new DateTime("1200-01-05")];
+$data = [
+    ['2010-01-10', '1', 1000, 60],
+    ['2015-10-01', '2', 1500, 30],
+    ['2004-01-10', '3', 800, 20],
+    ['2001-01-10', '4', 600, 10]
+];
 
-asort($date);
-print_r($date);
+array_multisort(array_column($data, '0'), SORT_DESC, $data);
+var_dump($data);
+foreach ($data as $key) {
+    echo $key[0]. "<br>".$key[1]. "<br>". $key[2] ."<br>". $key[3];
+    var_dump($key);
+}
+?>
